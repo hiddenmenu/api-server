@@ -11,11 +11,6 @@ import del from 'del';
 
 let cache = new Cache();
 
-const DIR = {
-    SRC: 'src',
-    DEST: 'dist'
-};
-
 const SRC = {
     SERVER: 'server/**/*.js'
 };
@@ -23,9 +18,9 @@ const SRC = {
 const DEST = {
     SERVER: 'app'
 };
-
+//
 gulp.task('clean', () => {
-    return del.sync([DIR.DEST]);
+    return del.sync([DEST.SERVER]);
 });
 
 
@@ -53,13 +48,13 @@ gulp.task('watch', () => {
     }
 });
 
-gulp.task('start', ['babel'], () => {
+gulp.task('production', ['babel']);
+
+gulp.task('development', ['watch', 'babel'], () => {
+    process.env.NODE_ENV = 'development';
     return nodemon({
         script: DEST.SERVER + '/main.js',
         watch: DEST.SERVER
     });
 });
 
-gulp.task('default', ['clean', 'watch', 'start'], () => {
-    gutil.log('Gulp is running');
-});
