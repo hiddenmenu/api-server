@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  nginx:
+    container_name: nginx
+    image: hiddenmenu/nginx:latest
+    links:
+      - app:app
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+  app:
+    container_name: hiddenmenu-api-server
+    image: hiddenmenu/api-server:latest
+    ports:
+      - 3000
