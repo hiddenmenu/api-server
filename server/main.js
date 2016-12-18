@@ -10,6 +10,7 @@ import fs from 'fs';
 import errorHandler from 'errorhandler';
 import helmet from 'helmet'
 import cors from 'cors';
+import child_process from 'child_process'
 
 if (cluster.isMaster) {
     for (var i = 0; i < numCPUs; i++) {
@@ -24,6 +25,7 @@ if (cluster.isMaster) {
     if (process.env.NODE_ENV === 'production') {
         console.log("in prod mode");
     }
+
 }
 
 import user from './user'
@@ -56,7 +58,12 @@ if (cluster.isWorker) {
     }
 
     app.use('/user', user());
-
+    app.use('/auto',()=>{
+        "use strict";
+        child_process.exec("sh auto.sh", (err, result, what)=> {
+            console.log(result);
+        });
+    })
     if (process.env.NODE_ENV === 'development') {
         app.use(errorHandler())
     }
