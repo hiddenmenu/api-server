@@ -4,7 +4,7 @@ let router = Router();
 router
     .get('/',(req,res)=>{
         "use strict";
-        res.send("hello woo");
+        res.send("hello woo heello");
     })
     .get('/login', (req, res)=> {
         "use strict";
