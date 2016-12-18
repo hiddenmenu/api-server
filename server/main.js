@@ -60,5 +60,5 @@ if (cluster.isWorker) {
     if (process.env.NODE_ENV === 'development') {
         app.use(errorHandler())
     }
-    app.listen(3001);
+    app.listen(3000);
 }
