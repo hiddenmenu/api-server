@@ -1,3 +1,3 @@
-docker-compose down;
+docker-compose -p api down;
 docker-compose pull;
-docker-compose up;
+docker-compose -p api up -d;
